@@ -1,3 +1,9 @@
+# Notes for interviewers
+
+- This is a React app. Please clone this repo and first run "npm install" and then "npm start" to test out the app.
+- Testing is not yet complete due to time constraints (I will complete testing by the end of today).
+- Graph axis ticks would be added if I had time
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
