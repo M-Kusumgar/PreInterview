@@ -5,7 +5,7 @@ import YAxis from '../IndividualComps/YAxis';
 import XAxis from '../IndividualComps/XAxis';
 import LineGraphMarks from '../IndividualComps/LineGraphMarks';
 import regions from '../IndividualComps/regions';
-import Dropdown from '../IndividualComps/Dropdown';
+import Dropdown from '../IndividualComps/Dropdown/Dropdown';
 
 const dropdownVals = Object.keys(regions)
 const width = 960
@@ -16,9 +16,10 @@ const yAxisLabelOffset = 60
 
 const TimeLineGraph = () => {
     
-    const [region, setRegion] = useState("London");
-    const data = useData(region)
+    const [region, setRegion] = useState("London")
+    const csvUrl = `https://api.coronavirus.data.gov.uk/v2/data?areaType=region&areaCode=${regions[region]}&metric=newCasesBySpecimenDate&format=csv`
 
+    const data = useData(region, csvUrl)
     if (!data ) {
         return (
             <pre>Loading...</pre>
@@ -48,7 +49,7 @@ const TimeLineGraph = () => {
 
     return (
 
-    <>
+    <div data-testid="time-line-graph">
         <Dropdown
         discreteVals={dropdownVals}
         val={region}
@@ -84,6 +85,7 @@ const TimeLineGraph = () => {
             x={innerWidth / 2}
             y={innerHeight + xAxisLabelOffset}
             textAnchor="middle"
+            data-testid='x-label'
             >
             {xAxisLabel}
             </text>
@@ -97,7 +99,7 @@ const TimeLineGraph = () => {
             />
         </g>
         </svg>
-    </>
+    </div>
     )
 }
 

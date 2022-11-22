@@ -1,12 +1,8 @@
 import { useState, useEffect } from 'react';
 import { csv } from 'd3';
-import regions from '../IndividualComps/regions';
 
-
-
-export const useData = ( selectedRegion ) => {
+export const useData = ( selectedRegion, csvUrl ) => {
     
-    const csvUrl = `https://api.coronavirus.data.gov.uk/v2/data?areaType=region&areaCode=${regions[selectedRegion]}&metric=newCasesBySpecimenDate&format=csv`
     const [data, setData] = useState(null);
 
     useEffect(() => {
