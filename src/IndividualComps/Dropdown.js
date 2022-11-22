@@ -13,10 +13,12 @@ const Dropdown = ({discreteVals, val, onChange}) => {
                 size="small"
                 style={{shadow:"none"}}
                 sx={{mt:"17px", mx:1}}
+                data-testid="region-select"
             >
                 {discreteVals.map((discreteVal) => {
                     return <MenuItem key={discreteVal} value={discreteVal}
-                            style={{margin:0}}>
+                            style={{margin:0}}
+                            data-testid="region-select-options">
                                 {discreteVal}
                             </MenuItem>
                 })}

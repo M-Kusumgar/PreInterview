@@ -1,8 +1,10 @@
-import { render, screen } from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
 import App from './App';
 
 test('renders dropdown', () => {
-  render(<App />);
-  const linkElement = screen.getByTestId("graph group");
-  expect(linkElement).toBeInTheDocument();
+  const {getByTestId, getAllByTestId} = render(<App />);
+  fireEvent.change(getByTestId("region-select"), { target: { value: "East Midlands" } })
+  const options = getAllByTestId("region-select-options");
+  
+  expect(options[0].selected).toBeTruthy()
 });

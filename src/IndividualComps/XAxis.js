@@ -1,22 +1,25 @@
 const XAxis = ({ 
     xScale, 
-    innerWidth, 
-    tickOffset = 3 }) => {
-
+    innerHeight,
+    tickFormat,
+    tickOffset = 10 }) => (
         xScale.ticks().map(tickValue => (
-          <g className="tick" transform={`translate(0,${xScale(tickValue)})`}>
-            <line x2={innerWidth} />
+          <g className="tick"
+          key={tickValue} 
+          transform={`translate(${xScale(tickValue)},0)`}
+          >
+            <line y2={innerHeight} stroke="LightGrey" />
             <text
               key={tickValue}
-              style={{ textAnchor: 'end' }}
-              x={-tickOffset}
+              style={{ textAnchor: 'middle' }}
+              y={innerHeight + tickOffset}
               dy=".71em"
             >
-              {tickValue}
+              {tickFormat(tickValue)}
             </text>
           </g>
         ))
-    }
+    )
 
 
 export default XAxis

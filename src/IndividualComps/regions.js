@@ -8,6 +8,6 @@ const regions = {
     "South West": "E12000009",
     "West Midlands": "E12000005",
     "Yorkshire and The Humber": "E12000003",
-}
+} 
 
 export default regions

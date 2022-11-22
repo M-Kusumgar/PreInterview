@@ -1,8 +1,8 @@
 import { scaleLinear, scaleTime, timeFormat, extent } from 'd3';
 import { useData } from '../Hooks/useData';
 import { useState } from 'react';
-import XAxis from '../IndividualComps/XAxis';
 import YAxis from '../IndividualComps/YAxis';
+import XAxis from '../IndividualComps/XAxis';
 import LineGraphMarks from '../IndividualComps/LineGraphMarks';
 import regions from '../IndividualComps/regions';
 import Dropdown from '../IndividualComps/Dropdown';
@@ -11,8 +11,8 @@ const dropdownVals = Object.keys(regions)
 const width = 960
 const height = 500
 const margin = { top: 20, right: 30, bottom: 65, left: 90 }
-const xAxisLabelOffset = 50
-const yAxisLabelOffset = 45
+const xAxisLabelOffset = 60
+const yAxisLabelOffset = 60
 
 const TimeLineGraph = () => {
     
@@ -25,8 +25,6 @@ const TimeLineGraph = () => {
         )
     }
 
-    console.log(data)
-
     const innerHeight = height - margin.top - margin.bottom
     const innerWidth = width - margin.left - margin.right
 
@@ -34,9 +32,9 @@ const TimeLineGraph = () => {
     const xAxisLabel = 'Date'
 
     const yValue = d => d.newCases
-    const yAxisLabel = 'New cases in your area'
+    const yAxisLabel = `New cases in ${region}`
 
-    const xAxisTickFormat = timeFormat('%m')
+    const xAxisTickFormat = timeFormat('%b %Y')
 
     const xScale = scaleTime()
         .domain(extent(data, xValue))
@@ -48,8 +46,6 @@ const TimeLineGraph = () => {
         .range([innerHeight, 0])
         .nice()
 
-    
-
     return (
 
     <>
@@ -60,13 +56,13 @@ const TimeLineGraph = () => {
         />
 
         <svg width={width} height={height}
-        data-testid = "graph group">
-        <g transform={`translate(${margin.left},${margin.top})`}>
-            <XAxis
-            xScale={xScale}
-            innerHeight={innerHeight}
-            tickFormat={xAxisTickFormat}
-            tickOffset={7}
+        >
+        <g transform={`translate(${margin.left},${margin.top})`}
+        >
+            <YAxis 
+            yScale={yScale} 
+            innerWidth={innerWidth} 
+            tickOffset={5} 
             />
             <text
             className="axis-label"
@@ -76,7 +72,13 @@ const TimeLineGraph = () => {
             >
             {yAxisLabel}
             </text>
-            <YAxis yScale={yScale} innerWidth={innerWidth} tickOffset={7} />
+
+            <XAxis
+            xScale={xScale}
+            innerHeight={innerHeight}
+            tickFormat={xAxisTickFormat}
+            tickOffset={20}
+            />
             <text
             className="axis-label"
             x={innerWidth / 2}
@@ -85,6 +87,7 @@ const TimeLineGraph = () => {
             >
             {xAxisLabel}
             </text>
+
             <LineGraphMarks
             data={data}
             xScale={xScale}

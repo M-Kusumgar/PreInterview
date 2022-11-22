@@ -8,4 +8,7 @@
     stroke-linejoin: round;
     stroke-linecap: round;
   }
-  
+
+  .tick text {
+    fill: #635F5D;
+  }
